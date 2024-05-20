@@ -2,12 +2,11 @@
 
 namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 
+use DateTime;
+
 /*
  * Doklad
  */
-
-use DateTime;
-
 final class ReceiptDto extends RegistrationRequestDataDto {
     /**
      * Typ pokladničného dokladu.

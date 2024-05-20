@@ -9,6 +9,7 @@ use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Exception\UnsupportedFormatException;
 use Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
@@ -48,6 +49,37 @@ final class SymfonyJsonSerializer implements SerializerInterface
 
     function deserialize($data, $type)
     {
-        return $this->serializer->deserialize($data, $type, 'json');
+        // return $this->serializer->deserialize($data, $type, 'json');
+
+        $format = 'json';
+
+        if (!$this->serializer->supportsDecoding($format)) {
+            throw new UnsupportedFormatException(sprintf('Deserialization for the format "%s" is not supported.', $format));
+        }
+
+        $data = $this->serializer->decode($data, $format);
+
+        if ($this->_is_array($data)) {
+            $result = array();
+
+            foreach ($data as $item) {
+                $entry = $this->serializer->denormalize($item, $type, $format);
+                array_push($result, $entry);
+            }
+
+            return $result;
+        } else {
+            return $this->serializer->denormalize($data, $type, $format);
+        }
+    }
+
+    private function _is_array($arr): bool {
+        $keys = array_keys($arr);
+        foreach ($keys as $key) {
+            if (!is_numeric($key)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

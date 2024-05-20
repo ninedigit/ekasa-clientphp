@@ -5,6 +5,8 @@ namespace NineDigit\eKasa\Client;
 use InvalidArgumentException;
 use NineDigit\eKasa\Client\Exceptions\ProblemDetailsException;
 use NineDigit\eKasa\Client\Exceptions\ValidationProblemDetailsException;
+use NineDigit\eKasa\Client\Models\Certificates\CertificateDto;
+use NineDigit\eKasa\Client\Models\Certificates\CertificateInfoDto;
 use NineDigit\eKasa\Client\Models\EKasaProductInfoDto;
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptRequestContextDto;
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptResultDto;
@@ -29,6 +31,37 @@ final class ApiClient {
     }
   }
 
+  // Certificates
+
+  /**
+   * @return CertificateInfoDto[]
+   */
+  public function getCertificates(?string $cashRegisterCode = null): array {
+    $qs = array("cashRegisterCode" => $cashRegisterCode);
+    $apiRequest = ApiRequestBuilder::createGet("/v1/certificates", $qs)->build();
+    return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
+  }
+
+  public function addCertificate(CertificateDto $certificate): CertificateInfoDto {
+    $apiRequest = ApiRequestBuilder::createPost("/v1/certificates")
+    ->withPayload($certificate)
+    ->build();
+    
+    return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
+  }
+
+  public function getLatestCertificate(string $cashRegisterCode): CertificateInfoDto {
+    $qs = array("cashRegisterCode" => $cashRegisterCode);
+    $apiRequest = ApiRequestBuilder::createGet("/v1/certificates/latest", $qs)->build();
+    return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
+  }
+
+  public function getLatestValidCertificate(string $cashRegisterCode): CertificateInfoDto {
+    $qs = array("cashRegisterCode" => $cashRegisterCode);
+    $apiRequest = ApiRequestBuilder::createGet("/v1/certificates/valid/latest", $qs)->build();
+    return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
+  }
+      
   // Product
 
   /**
