@@ -7,6 +7,7 @@ use NineDigit\eKasa\Client\Exceptions\ProblemDetailsException;
 use NineDigit\eKasa\Client\Exceptions\ValidationProblemDetailsException;
 use NineDigit\eKasa\Client\Models\Certificates\CertificateDto;
 use NineDigit\eKasa\Client\Models\Certificates\CertificateInfoDto;
+use NineDigit\eKasa\Client\Models\Connectivity\ConnectivityMonitorStatusDto;
 use NineDigit\eKasa\Client\Models\EKasaProductInfoDto;
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptRequestContextDto;
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptResultDto;
@@ -60,6 +61,13 @@ final class ApiClient {
     $qs = array("cashRegisterCode" => $cashRegisterCode);
     $apiRequest = ApiRequestBuilder::createGet("/v1/certificates/valid/latest", $qs)->build();
     return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
+  }
+
+  // Connectivity
+
+  public function getStatus(): ConnectivityMonitorStatusDto {
+    $apiRequest = ApiRequestBuilder::createGet("/v1/connectivity/status")->build();
+    return $this->httpClient->receive($apiRequest, ConnectivityMonitorStatusDto::class);
   }
       
   // Product
