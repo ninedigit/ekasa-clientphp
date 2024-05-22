@@ -119,7 +119,7 @@ class HttpClient implements HttpClientInterface
         if (count($queryString) > 0) {
             $url .= "?" . htmlspecialchars(http_build_query($queryString, "", "&", PHP_QUERY_RFC3986));
         }
-        
+
         return new ApiRequestMessage($request->method, $url, $headers, $body);
     }
 
@@ -135,7 +135,8 @@ class HttpClient implements HttpClientInterface
                 $request->method,
                 $request->url,
                 $request->headers,
-                $request->body);
+                $request->body
+            );
             $guzzleResponse = $this->client->send($guzzleRequest, ["debug" => $this->debug]);
             $body = $guzzleResponse->getBody();
         } catch (RequestException $ex) {
@@ -182,14 +183,20 @@ class HttpClient implements HttpClientInterface
         }
 
         $isBeyondCodeExposeResponse = $response->getBooleanHeader(HeaderName::BEYONDCODE_EXPOSE_RESPONSE);
-        $isJsonContentType = $response->hasContentType(MediaTypeName::APPLICATION_JSON, MediaTypeName::APPLICATION_PROBLEM_JSON);
+        $isJsonContentType = $response->hasContentType(
+            MediaTypeName::APPLICATION_JSON,
+            MediaTypeName::APPLICATION_PROBLEM_JSON
+        );
 
         if ($isJsonContentType) {
             if (!$isBeyondCodeExposeResponse) {
                 if ($response->hasStatusCode(400) || $response->hasStatusCode(422)) {
-                    $validationProblemDetails = $this->serializer->deserialize($response->getBody(), ValidationProblemDetails::class);
+                    $validationProblemDetails = $this->serializer->deserialize(
+                        $response->getBody(),
+                        ValidationProblemDetails::class
+                    );
                     throw new ValidationProblemDetailsException($validationProblemDetails);
-                } else if ($response->hasStatusCode(401)) {
+                } elseif ($response->hasStatusCode(401)) {
                     $errorMessage = "Autentifikácia zlyhala.";
                     $schemeName = $response->getHeader(HeaderName::WWW_AUTHENTICATE);
                     switch ($schemeName) {
@@ -208,10 +215,10 @@ class HttpClient implements HttpClientInterface
                 $exposeError = $this->serializer->deserialize($response->getBody(), ExposeError::class);
                 $errorMessage = $exposeError->error;
 
-                switch ($exposeError->errorCode)
-                {
+                switch ($exposeError->errorCode) {
                     case ExposeErrorCode::TUNNEL_NOT_FOUND:
-                        $errorMessage = "Tunel nebol vytvorený. Cieľový počítač je vypnutý alebo nesprávne nakonfigurovaný.";
+                        $errorMessage = "Tunel nebol vytvorený. 
+                        Cieľový počítač je vypnutý alebo nesprávne nakonfigurovaný.";
                         break;
                 }
 
@@ -220,7 +227,7 @@ class HttpClient implements HttpClientInterface
         } else {
             $problemDetails = new StatusCodeProblemDetails($response->getStatusCode());
         }
-        
+
         throw new Exceptions\ProblemDetailsException($problemDetails);
     }
 }

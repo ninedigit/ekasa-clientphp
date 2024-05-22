@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 /**
  * Objekt nastavení elektronického dokladu.
  */
-final class EmailReceiptPrinterOptions extends ReceiptPrinterOptions {
+final class EmailReceiptPrinterOptions extends ReceiptPrinterOptions
+{
     /**
      * Povinná e-mailová adresa adresáta (príjemca e-mailu).
      * @example mail@mail.com
@@ -18,13 +19,13 @@ final class EmailReceiptPrinterOptions extends ReceiptPrinterOptions {
     public ?string $recipientDisplayName;
 
     /**
-     * Nepovinný predmet e-mailu. Ak je uvedené (nie <c>null</c>), 
+     * Nepovinný predmet e-mailu. Ak je uvedené (nie <c>null</c>),
      * aplikácia uprednostní túto hodnotu pred hodnotou v nastaveniach aplikácie.
      */
     public ?string $subject;
 
     /**
-     * Nepovinné telo e-mailu. Ak je uvedené (nie <c>null</c>), aplikácia 
+     * Nepovinné telo e-mailu. Ak je uvedené (nie <c>null</c>), aplikácia
      * uprednostní túto hodnotu pred hodnotou v nastaveniach aplikácie.
      */
     public ?string $body;
@@ -33,7 +34,8 @@ final class EmailReceiptPrinterOptions extends ReceiptPrinterOptions {
         string $to = "mail@mail.com",
         ?string $recipientDisplayName = null,
         ?string $subject = null,
-        ?string $body = null) {
+        ?string $body = null
+    ) {
         $this->to = $to;
         $this->recipientDisplayName = $recipientDisplayName;
         $this->subject = $subject;

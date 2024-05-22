@@ -2,7 +2,8 @@
 
 namespace NineDigit\eKasa\Client\Models;
 
-class ExposeError {
+class ExposeError
+{
     public string $error;
     public ?int $errorCode = null;
 }

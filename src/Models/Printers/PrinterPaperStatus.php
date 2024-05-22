@@ -5,27 +5,25 @@ namespace NineDigit\eKasa\Client\Models\Printers;
 /**
  * Výsledok kontroly stavu tlačiarne.
  */
-
- final class PrinterStatusDto{
+final class PrinterStatusDto
+{
     /**
      * Papier je vložený.
      */
-    const READY = "READY";
+    public const READY = "READY";
 
     /**
      * Dvierka na tlačiarni sú otvorené.
      */
-    const COVEROPEN = "CoverOpen";
+    public const COVEROPEN = "CoverOpen";
 
     /**
      * Nízky stav papiera v tlačiarni.
      */
-    const NEAREND = "NearEnd";
+    public const NEAREND = "NearEnd";
 
     /**
      * Chýbajúci papier v tlačiarni.
      */
-    const EMPTY = "Empty";
-
-
- }
+    public const EMPTY = "Empty";
+}

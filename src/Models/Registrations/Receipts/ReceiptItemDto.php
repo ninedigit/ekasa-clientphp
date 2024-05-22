@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 use NineDigit\eKasa\Client\Models\QuantityDto;
 use NineDigit\eKasa\Client\Models\SellerDto;
 
-final class ReceiptItemDto {
+final class ReceiptItemDto
+{
     /**
      * Typ položky dokladu
      * @see ReceiptItemType
@@ -51,7 +52,7 @@ final class ReceiptItemDto {
     public float $vatRate;
     /**
      * Číslo dokladu, ku ktorému sa vzťahuje oprava alebo vrátenie položky
-     * Číslo dokladu ak sa jedná o položku typu Correction alebo Return alebo 
+     * Číslo dokladu ak sa jedná o položku typu Correction alebo Return alebo
      * null v opačnom prípade.
      * V prípade, ak pôvodný doklad obsahuje unikátny identifikátor dokladu,
      * ako referenčné číslo dokladu sa uvedie tento identifikátor. V prípade,
@@ -64,7 +65,7 @@ final class ReceiptItemDto {
      */
     public ?string $referenceReceiptId;
     /**
-     * Príznak, ktorý bližšie špecifikuje „dôvod“ priradenia dane s hodnotou 0, 
+     * Príznak, ktorý bližšie špecifikuje „dôvod“ priradenia dane s hodnotou 0,
      * ak bola položke priradená.
      * Platná hodnota dôvodu priradenia nulovej dane alebo null.
      * Hodnota môže byť uvedená iba pre položky s nulovou sadzbou dane.

@@ -2,11 +2,14 @@
 
 namespace NineDigit\eKasa\Client\Models\Storage;
 
-final class StorageModel{
-
-    const CHDU_LITE_IMAGE = "ChduLiteImage";
-    const CHDU_SK_IMAGE = "ChduSkImage";
-    const IN_MEMORY = "InMemory";
-    const CHDU_SK = "ChduSk";
-    const CHDU_LITE = "ChduLite";
+/**
+ * Identifikátor modelu chráneného dátového úložiska
+ */
+final class StorageModel
+{
+    public const CHDU_LITE_IMAGE = "ChduLiteImage";
+    public const CHDU_SK_IMAGE = "ChduSkImage";
+    public const IN_MEMORY = "InMemory";
+    public const CHDU_SK = "ChduSk";
+    public const CHDU_LITE = "ChduLite";
 }

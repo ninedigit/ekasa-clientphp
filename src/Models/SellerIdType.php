@@ -10,11 +10,11 @@ final class SellerIdType
     /**
      * Daňové identifikačné číslo.
      */
-    const DIC = "DIC";
+    public const DIC = "DIC";
     /**
      * Identifikačné číslo pre daň z pridanej hodnoty.
      */
-    const ICDPH = "ICDPH";
+    public const ICDPH = "ICDPH";
 
     private function __construct()
     {

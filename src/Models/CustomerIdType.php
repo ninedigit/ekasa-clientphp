@@ -1,4 +1,5 @@
 <?php
+
 //
 //namespace NineDigit\eKasa\Client\Models;
 //

@@ -41,7 +41,8 @@ require '../vendor/autoload.php';
 
     // 1.2 Nastavenie autentifikácie
 
-    // 1.2.1 Ak je zapnuté zabezpečenie (viďte WebAdmin (http://localhost:3010) -> Nastavenia -> Ostatné -> Zabezpečenie)
+    // 1.2.1 Ak je zapnuté zabezpečenie (viďte WebAdmin (http://localhost:3010) ->
+    // Nastavenia -> Ostatné -> Zabezpečenie)
     $credentials = new Credentials("admin", "admin");
 
     // 1.2.2 Ak sa pripájate cez internet a máte zakúpenú službu Expose.
@@ -125,18 +126,13 @@ $requestContext = new RegisterReceiptRequestContextDto($print, $request);
 // Zaslanie požidavky a obdržanie výsledku
 $result = $client->registerReceipt($requestContext);
 
-// Doklad bol úspešne spracovaný v režíme ON-LINE
-if ($result->isSuccessful === true)
-{
+if ($result->isSuccessful === true) {
+    // Doklad bol úspešne spracovaný v režíme ON-LINE
     // ...
-}
-// Doklad bol úspešne spracovaný v režíme OFF-LINE
-else if ($result->isSuccessful === null)
-{
+} elseif ($result->isSuccessful === null) {
+    // Doklad bol úspešne spracovaný v režíme OFF-LINE
     // ...
-}
-// Spracovanie dokladu zlyhalo
-else
-{
+} else {
+     // Spracovanie dokladu zlyhalo
     throw new Error("Spracovanie dokladu zlyhalo: {$result->error->message} [{$result->error->code}].");
 }

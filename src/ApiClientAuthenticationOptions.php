@@ -15,8 +15,10 @@ final class ApiClientAuthenticationOptions
      */
     public ?ApiClientAuthenticationAccessTokenOptions $accessToken;
 
-    public function __construct(?Credentials $credentials = null, ?ApiClientAuthenticationAccessTokenOptions $accessToken = null)
-    {
+    public function __construct(
+        ?Credentials $credentials = null,
+        ?ApiClientAuthenticationAccessTokenOptions $accessToken = null
+    ) {
         $this->credentials = $credentials;
         $this->accessToken = $accessToken;
     }

@@ -5,8 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Identities;
 /**
  * Údaje o podnikateľovi
  */
-final class IdentityDto {
-
+final class IdentityDto
+{
     /**
      * Daňové identifikačné číslo
      * Texový reťazec pozostávajúci z 10 číslic
@@ -16,13 +16,15 @@ final class IdentityDto {
 
     /**
      * Identifikačné číslo organizácie podnikateľa, ak podnikateľovi bolo pridelené
-     * Textový reťazec pozostávajúci z číslic a s dĺžkou 6, 8 alebo 12 znakov v prípadne, ak bolo IČO podnikateľovi pridelené, null v opačnom prípade
+     * Textový reťazec pozostávajúci z číslic a s dĺžkou 6, 8 alebo 12 znakov
+     * v prípadne, ak bolo IČO podnikateľovi pridelené, null v opačnom prípade
      * @example 76543210
      */
     public ?string $ico;
 
     /**
-     * Identifikačné číslo pre daň z pridanej hodnoty, ak podnikateľ je platiteľom dane z pridanej hodnoty
+     * Identifikačné číslo pre daň z pridanej hodnoty, ak podnikateľ je platiteľom
+     * dane z pridanej hodnoty
      * Textový reťazec začínajúci "SK" a nasledovaný 10 číslicami v prípade,
      * ak je podnikateľ platiteľom dane z pridanej hodnoty, null ak nie je
      * @example SK1234567890

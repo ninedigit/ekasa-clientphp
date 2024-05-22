@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Product;
 /**
  *  Informácie o produkte
  */
-final class ProductIdDto{
+final class ProductIdDto
+{
     /**
      * Názov produktu
      * @example Portos eKasa

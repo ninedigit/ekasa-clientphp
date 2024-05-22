@@ -7,7 +7,8 @@ use DateTime;
 /*
  * Doklad
  */
-final class ReceiptDto extends RegistrationRequestDataDto {
+final class ReceiptDto extends RegistrationRequestDataDto
+{
     /**
      * Typ pokladničného dokladu.
      * @see ReceiptType

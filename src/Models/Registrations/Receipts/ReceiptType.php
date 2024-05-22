@@ -5,36 +5,38 @@ namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 /**
  * Typ dokladu
  */
-final class ReceiptType {
+final class ReceiptType
+{
     /**
      * Pokladničný doklad
      */
-    const CASH_REGISTER = "CashRegister";
+    public const CASH_REGISTER = "CashRegister";
     /**
      * Neplatný doklad
      */
-    const INVALID = "Invalid";
+    public const INVALID = "Invalid";
     /**
      * Paragón
      */
-    const PARAGON = "Paragon";
+    public const PARAGON = "Paragon";
     /**
      * Úhrada faktúry
      */
-    const INVOICE = "Invoice";
+    public const INVOICE = "Invoice";
     /**
      * Paragón pri úhrade faktúry
      */
-    const INVOICE_PARAGON = "InvoiceParagon";
+    public const INVOICE_PARAGON = "InvoiceParagon";
     /**
      * Doklad označený slovom „Vklad“
      */
-    const DEPOSIT = "Deposit";
+    public const DEPOSIT = "Deposit";
     /**
      * Doklad označený slovom „Výber“
      */
-    const WITHDRAW = "Withdraw";
+    public const WITHDRAW = "Withdraw";
 
-    private function __construct() {
+    private function __construct()
+    {
     }
 }

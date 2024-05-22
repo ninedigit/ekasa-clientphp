@@ -54,16 +54,18 @@ final class SymfonyJsonSerializerTest extends TestCase
         $itemSeller->type = SellerIdType::ICDPH;
 
         $receipt->items = array(
-            new ReceiptItemDto(ReceiptItemType::POSITIVE,
-            "Coca Cola 0.25l",
-            1.29,
-            20.00,
-            new QuantityDto(2.0000, "ks"),
-            2.58,
-            "Akcia", $itemSeller,
-            TaxFreeReason::USED_GOOD,
-            "201801001",
-            "O-7DBCDA8A56EE426DBCDA8A56EE426D1A"
+            new ReceiptItemDto(
+                ReceiptItemType::POSITIVE,
+                "Coca Cola 0.25l",
+                1.29,
+                20.00,
+                new QuantityDto(2.0000, "ks"),
+                2.58,
+                "Akcia",
+                $itemSeller,
+                TaxFreeReason::USED_GOOD,
+                "201801001",
+                "O-7DBCDA8A56EE426DBCDA8A56EE426D1A"
             )
         );
         $receipt->payments = array(
@@ -134,7 +136,10 @@ final class SymfonyJsonSerializerTest extends TestCase
     public function testRegisterReceiptRequestContextDtoSerialization()
     {
         $serializer = new SymfonyJsonSerializer();
-        $request = new RegisterReceiptRequestContextDto(new PosRegisterReceiptPrintContextDto(), new RegisterReceiptRequestDto(new ReceiptDto()));
+        $request = new RegisterReceiptRequestContextDto(
+            new PosRegisterReceiptPrintContextDto(),
+            new RegisterReceiptRequestDto(new ReceiptDto())
+        );
 
         $json = $serializer->serialize($request);
         $data = json_decode($json, true);
@@ -290,7 +295,10 @@ final class SymfonyJsonSerializerTest extends TestCase
         $this->assertEquals(ReceiptType::CASH_REGISTER, $result->request->data->receiptType);
         $this->assertEquals(3.50, $result->request->data->amount);
         $this->assertEquals(0.02, $result->request->data->roundingAmount);
-        $this->assertEquals(DateTimeHelper::createEuropeBratislava(2023, 9, 11, 18, 14, 11), $result->request->data->issueDate);
+        $this->assertEquals(
+            DateTimeHelper::createEuropeBratislava(2023, 9, 11, 18, 14, 11),
+            $result->request->data->issueDate
+        );
         $this->assertEquals(6, $result->request->data->receiptNumber);
         $this->assertEquals("201801001", $result->request->data->invoiceNumber);
         $this->assertEquals(429, $result->request->data->paragonNumber);
@@ -306,7 +314,10 @@ final class SymfonyJsonSerializerTest extends TestCase
         $this->assertEquals("OhI/bUdkSi9hRXsBm6Hymv9tKo9Yo2ZULuxSiLlHMXhlwmRHoQLnMmehnqs68m6iH3juPR/5r9wiAuuY/dOigTrd70dRLbHtGU4PNeI+IIC/2VUFucN2kfl4Ehx5jzBGVAWxAbESX40SN2RskRXK8hXze954YN01feTlq+FLtYW7hp25ckWUYSRN1StpNEv8Klm2qQ62U51VzKc1Xo5RoWoB7ZUydnDKkDyWUT1Vw/Eg/k8a/4Hk+Xrd+Vn1gXGSvYmkGBDHdC7aTp87FQ/NtjvJDF0embjqzJpBqkmafu9fsUL/fqNU/ygV8VLbbBd7SyzyyAUBLAhXdtWaPDWBYA==", $result->request->data->pkp);
         $this->assertEquals("Nine Digit, s.r.o.", $result->request->data->headerText);
         $this->assertEquals("Ďakujeme za nákup!", $result->request->data->footerText);
-        $this->assertEquals(DateTimeHelper::createEuropeBratislava(2023, 9, 11, 18, 14, 11), $result->request->data->createDate);
+        $this->assertEquals(
+            DateTimeHelper::createEuropeBratislava(2023, 9, 11, 18, 14, 11),
+            $result->request->data->createDate
+        );
         $this->assertEquals("1234567890", $result->request->data->dic);
         $this->assertEquals("88812345678900001", $result->request->data->cashRegisterCode);
 
@@ -349,7 +360,10 @@ final class SymfonyJsonSerializerTest extends TestCase
         $this->assertInstanceOf(RegisterReceiptResultResponseDto::class, $result->response);
         $this->assertInstanceOf(ReceiptRegistrationResultReceiptDataDto::class, $result->response->data);
         $this->assertEquals("O-0A3730BF772041C9B730BF77205-TEST", $result->response->data->id);
-        $this->assertEquals(DateTimeHelper::createEuropeBratislava(2023, 9, 11, 18, 14, 12), $result->response->processDate);
+        $this->assertEquals(
+            DateTimeHelper::createEuropeBratislava(2023, 9, 11, 18, 14, 12),
+            $result->response->processDate
+        );
 
         $this->assertTrue(true, $result->isSuccessful);
         $this->assertInstanceOf(EKasaErrorDto::class, $result->error);

@@ -5,17 +5,18 @@ namespace NineDigit\eKasa\Client\Models\Connectivity;
 /**
  * Stav internetového spojenia
  */
-final class InternetConnectionState {
+final class InternetConnectionState
+{
     /**
      * Neznámy
      */
-    const UNKNOWN = "Unknown";
+    public const UNKNOWN = "Unknown";
     /**
      * Internetové spojenie je dostupné.
      */
-    const UP = "Up";
+    public const UP = "Up";
     /**
      * Internetové spojenie nie je dostupné.
      */
-    const DOWN = "Down";
+    public const DOWN = "Down";
 }

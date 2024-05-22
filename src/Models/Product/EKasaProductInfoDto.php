@@ -5,8 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Product;
 /**
  * Informácie o pokladničnom programe
  */
-final class EKasaProductInfoDto{
-
+final class EKasaProductInfoDto
+{
     /**
      * Názov výrobcu
      * @example Nine Digit, s.r.o
@@ -28,5 +28,4 @@ final class EKasaProductInfoDto{
      * Informácie o chránenom dátovom úložisku
      */
     public ProductIdDto $CHDU;
-
 }

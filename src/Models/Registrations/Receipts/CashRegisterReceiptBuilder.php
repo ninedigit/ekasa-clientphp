@@ -10,8 +10,9 @@ class CashRegisterReceiptBuilder extends ReceiptBuilder
         return $this;
     }
 
-    public function addPayment(ReceiptPaymentDto ...$payment): CashRegisterReceiptBuilder
-    {
+    public function addPayment(
+        ReceiptPaymentDto ...$payment
+    ): CashRegisterReceiptBuilder {
         if (!is_array($this->receipt->payments)) {
             $this->receipt->payments = array();
         }

@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Storage;
 /**
  * Informácie o výrobcovi úložiska
  */
-final class StorageProductInfoDto{
+final class StorageProductInfoDto
+{
     /**
      * Názov výrobcu úložiska
      * @example Nine Digit, s.r.o.

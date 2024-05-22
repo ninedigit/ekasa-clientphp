@@ -9,11 +9,12 @@ use NineDigit\eKasa\Client\Exceptions\ProblemDetailsException;
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptResultDto;
 use NineDigit\eKasa\Client\Serialization\SymfonyJsonSerializer;
 use NineDigit\eKasa\Client\Tests\TestableHttpClient;
-
 use Throwable;
 
-final class HttpClientTest extends TestCase {
-    public function testThrowOnErrorThrowsStatusCodeProblemDetailsForResponseWithErrorStatusCodeAndNoBody() {
+final class HttpClientTest extends TestCase
+{
+    public function testThrowOnErrorThrowsStatusCodeProblemDetailsForResponseWithErrorStatusCodeAndNoBody()
+    {
         $apiClientOptions = new ApiClientOptions();
         $client = new TestableHttpClient($apiClientOptions);
         $response = new ApiResponseMessage(403);
@@ -36,8 +37,7 @@ final class HttpClientTest extends TestCase {
         $serializer = new SymfonyJsonSerializer();
         $throws = false;
 
-        try
-        {
+        try {
             $serializer->deserialize($response['body'], RegisterReceiptResultDto::class);
         } catch (Throwable $e) {
             $throws = true;
@@ -74,7 +74,5 @@ final class HttpClientTest extends TestCase {
         }
 
         $this->assertFalse($throws);
-        
-
     }
 }

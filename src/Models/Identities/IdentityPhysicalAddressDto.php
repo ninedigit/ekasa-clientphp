@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Identities;
 /**
  * Fyzická adresa
  */
-final class IdentityPhysicalAddressDto{
+final class IdentityPhysicalAddressDto
+{
     /**
      * Názov štátu
      * Neprázdny textový reťazec s maximálnou dĺžkou 255 znakov
@@ -23,23 +24,26 @@ final class IdentityPhysicalAddressDto{
     /**
      * Názov obce. Obcou je územnosprávna jednotka charakterizovaná
      * súvislým domovým osídlením a vlastným názvom. Obcou je aj mesto.
-     * Neprázdny textový reťazec s maximálnou dĺžkou 255 znakov alebo <c>null</c>, ak nie uvedený
+     * Neprázdny textový reťazec s maximálnou dĺžkou 255 znakov alebo null,
+     * ak nie uvedený
      * @example Štrkovec
      */
     public ?string $municipality;
 
     /**
      * Názov budovy alebo číslo domu
-     * Neprázdny textový reťazec s maximálnou dĺžkou 255 znakov alebo null, ak nie uvedený
+     * Neprázdny textový reťazec s maximálnou dĺžkou 255 znakov alebo null,
+     * ak nie uvedený
      */
     public string $buildingNumber;
 
     /**
      * Súpisné číslo budovy
-     * Neprázdny textový reťazec s maximálnou dĺžkou 255 znakov alebo null, ak nie uvedené
+     * Neprázdny textový reťazec s maximálnou dĺžkou 255 znakov alebo null,
+     * ak nie uvedené
      * @example 7
      */
-    public string  $propertyRegistrationNumber;
+    public string $propertyRegistrationNumber;
 
     /**
      * Doručovacia adresa

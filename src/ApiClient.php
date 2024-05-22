@@ -19,134 +19,207 @@ use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptRequestC
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptResultDto;
 use NineDigit\eKasa\Client\Models\Storage\StorageInfoDto;
 
-final class ApiClient {
-  private HttpClientInterface $httpClient;
+final class ApiClient
+{
+    private HttpClientInterface $httpClient;
 
-  /**
-   * @param $optionsOrClient ApiClientOptions | HttpClientInterface
-   * Akceptuje ApiClientOptions alebo HttpClientInterface.
-   * Preťaženie s HttpClientInterface sa využíva iba na testovacie účely. Využívajte preťaženie
-   * akceptujúce ApiClientOptions.
-   */
-  public function __construct($optionsOrClient) {
-    if ($optionsOrClient instanceof ApiClientOptions) {
-      $this->httpClient = new HttpClient($optionsOrClient);
-    } else if (is_subclass_of($optionsOrClient, HttpClientInterface::class)) {
-      $this->httpClient = $optionsOrClient;
-    } else {
-      throw new InvalidArgumentException("Expecting ". ApiClientOptions::class ." or ". HttpClientInterface::class . " type as an argument.");
+    /**
+     * @param $optionsOrClient ApiClientOptions | HttpClientInterface
+     * Akceptuje ApiClientOptions alebo HttpClientInterface.
+     * Preťaženie s HttpClientInterface sa využíva iba na testovacie účely. Využívajte preťaženie
+     * akceptujúce ApiClientOptions.
+     */
+    public function __construct($optionsOrClient)
+    {
+        if ($optionsOrClient instanceof ApiClientOptions) {
+            $this->httpClient = new HttpClient($optionsOrClient);
+        } elseif (is_subclass_of($optionsOrClient, HttpClientInterface::class)) {
+            $this->httpClient = $optionsOrClient;
+        } else {
+            throw new InvalidArgumentException(
+                "Expecting " . ApiClientOptions::class
+                . " or " . HttpClientInterface::class . " type as an argument."
+            );
+        }
     }
-  }
 
-  // Certificates
+    // Certificates
 
-  /**
-   * @return CertificateInfoDto[]
-   */
-  public function getCertificates(?string $cashRegisterCode = null): array {
-    $qs = array("cashRegisterCode" => $cashRegisterCode);
-    $apiRequest = ApiRequestBuilder::createGet("/v1/certificates", $qs)->build();
-    return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
-  }
+    /**
+     * @return CertificateInfoDto[]
+     */
+    public function getCertificates(?string $cashRegisterCode = null): array
+    {
+        $qs = array("cashRegisterCode" => $cashRegisterCode);
+        $apiRequest = ApiRequestBuilder::createGet("/v1/certificates", $qs)->build();
 
-  public function addCertificate(CertificateDto $certificate): CertificateInfoDto {
-    $apiRequest = ApiRequestBuilder::createPost("/v1/certificates")
-    ->withPayload($certificate)
-    ->build();
-    
-    return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
-  }
+        return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
+    }
 
-  public function getLatestCertificate(string $cashRegisterCode): CertificateInfoDto {
-    $qs = array("cashRegisterCode" => $cashRegisterCode);
-    $apiRequest = ApiRequestBuilder::createGet("/v1/certificates/latest", $qs)->build();
-    return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
-  }
+    /**
+     * TODO
+     */
+    public function addCertificate(CertificateDto $certificate): CertificateInfoDto
+    {
+        $apiRequest = ApiRequestBuilder::createPost("/v1/certificates")
+            ->withPayload($certificate)
+            ->build();
 
-  public function getLatestValidCertificate(string $cashRegisterCode): CertificateInfoDto {
-    $qs = array("cashRegisterCode" => $cashRegisterCode);
-    $apiRequest = ApiRequestBuilder::createGet("/v1/certificates/valid/latest", $qs)->build();
-    return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
-  }
+        return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
+    }
 
-  // Connectivity
-    public function getConnectivityStatus(): ConnectivityMonitorStatusDto {
-    $apiRequest = ApiRequestBuilder::createGet("/v1/connectivity/status")->build();
-    return $this->httpClient->receive($apiRequest, ConnectivityMonitorStatusDto::class);
-  }
-   
-  // Identities
-     
-  public function getAllIdentities(): array {
-    $apiRequest = ApiRequestBuilder::createGet("/v1/identities")->build();
-    return $this->httpClient->receive($apiRequest, IdentityDto::class);
-  }
+    /**
+     * TODO
+     */
+    public function getLatestCertificate(
+        string $cashRegisterCode
+    ): CertificateInfoDto {
+        $qs = array("cashRegisterCode" => $cashRegisterCode);
+        $apiRequest = ApiRequestBuilder::
+            createGet("/v1/certificates/latest", $qs)->build();
 
-  public function getIdentity(): array {
-    $apiRequest = ApiRequestBuilder::createGet("/v1/identities")->build();
-    return $this->httpClient->receive($apiRequest, IdentityDto::class);
-  }
+        return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
+    }
 
-  public function addIdentity(IdentityDto $identity): IdentityDto {
-    $apiRequest = ApiRequestBuilder::createPost("/v1/identities")
-    ->withPayload($identity)
-    ->build();
-    
-    return $this->httpClient->receive($apiRequest, IdentityDto::class);
-  }
+    /**
+     * TODO
+     */
+    public function getLatestValidCertificate(
+        string $cashRegisterCode
+    ): CertificateInfoDto {
+        $qs = array("cashRegisterCode" => $cashRegisterCode);
+        $apiRequest = ApiRequestBuilder::
+            createGet("/v1/certificates/valid/latest", $qs)->build();
 
-   // IndexTable
+        return $this->httpClient->receive($apiRequest, CertificateInfoDto::class);
+    }
 
-  public function getIndexTableStatus(): IndexTableStatusDto {
-    $apiRequest = ApiRequestBuilder::createGet("/v1/index_table/status")->build();
-    return $this->httpClient->receive($apiRequest, IndexTableStatusDto::class);
-  }
+    // Connectivity
 
-  //Printers
+    /**
+     * TODO
+     */
+    public function getConnectivityStatus(): ConnectivityMonitorStatusDto
+    {
+        $apiRequest = ApiRequestBuilder::createGet("/v1/connectivity/status")
+            ->build();
 
-  public function getPrinterStatus(): PrinterStatusDto {
-    $apiRequest = ApiRequestBuilder::createGet("/v1/printers/status")->build();
-    return $this->httpClient->receive($apiRequest, PrinterStatusDto::class);
-  }
+        return $this->httpClient
+            ->receive($apiRequest, ConnectivityMonitorStatusDto::class);
+    }
 
-  public function addPrint(TextPrintContextDto $printed): PrintResultDto{
-    $apiRequest = ApiRequestBuilder::createPost("/v1/printers/print")
-    ->withPayload($printed)
-    ->build();
+    // Identities
 
-    return $this->httpClient->receive($apiRequest, PrintResultDto::class);
-  }
+    /**
+     * TODO
+     */
+    public function getAllIdentities(): array
+    {
+        $apiRequest = ApiRequestBuilder::createGet("/v1/identities")->build();
 
-  // Product
+        return $this->httpClient->receive($apiRequest, IdentityDto::class);
+    }
 
-  /**
-   * Získanie informácii o pokladničnom programe a aktuálne pripojenom chránenom dátovom úložisku.
-   */
-  public function getProductInfo(): EKasaProductInfoDto {
-    $apiRequest = ApiRequestBuilder::createGet("/v1/product/info")->build();
-    return $this->httpClient->receive($apiRequest, EKasaProductInfoDto::class);
-  }
+    /**
+     * TODO
+     */
+    public function getIdentity(): array
+    {
+        $apiRequest = ApiRequestBuilder::createGet("/v1/identities")->build();
 
-  //Storage
-  public function getStorageInfo(): StorageInfoDto {
-    $apiRequest = ApiRequestBuilder::createGet("/v1/storage/info")->build();
-    return $this->httpClient->receive($apiRequest, StorageInfoDto::class);
-  }
+        return $this->httpClient->receive($apiRequest, IdentityDto::class);
+    }
 
-  // Registrations
+    /**
+     * TODO
+     */
+    public function addIdentity(IdentityDto $identity): IdentityDto
+    {
+        $apiRequest = ApiRequestBuilder::createPost("/v1/identities")
+            ->withPayload($identity)
+            ->build();
 
-  /**
-   * Zadá požiadavku na zaregistrovanie dokladu.
-   * @throws ValidationProblemDetailsException ak nie je požiadavka valídna
-   * @throws ProblemDetailsException
-   * @throws ExposeException
-   * @throws ApiAuthenticationException
-   * @throws Exception
-   */
-  public function registerReceipt(RegisterReceiptRequestContextDto $context): RegisterReceiptResultDto {
-    $apiRequest = ApiRequestBuilder::createPost("/v1/requests/receipts")
-      ->withPayload($context)
-      ->build();
-    return $this->httpClient->receive($apiRequest, RegisterReceiptResultDto::class);
-  }
+        return $this->httpClient->receive($apiRequest, IdentityDto::class);
+    }
+
+     // IndexTable
+
+     /**
+      * TODO
+      */
+    public function getIndexTableStatus(): IndexTableStatusDto
+    {
+        $apiRequest = ApiRequestBuilder::
+            createGet("/v1/index_table/status")->build();
+
+        return $this->httpClient->receive($apiRequest, IndexTableStatusDto::class);
+    }
+
+    //Printers
+
+    /**
+     * TODO
+     */
+    public function getPrinterStatus(): PrinterStatusDto
+    {
+        $apiRequest = ApiRequestBuilder::createGet("/v1/printers/status")->build();
+
+        return $this->httpClient->receive($apiRequest, PrinterStatusDto::class);
+    }
+
+    /**
+     * TODO
+     */
+    public function addPrint(TextPrintContextDto $printed): PrintResultDto
+    {
+        $apiRequest = ApiRequestBuilder::createPost("/v1/printers/print")
+            ->withPayload($printed)
+            ->build();
+
+        return $this->httpClient->receive($apiRequest, PrintResultDto::class);
+    }
+
+    // Product
+
+    /**
+     * Získanie informácii o pokladničnom programe a aktuálne pripojenom
+     * chránenom dátovom úložisku.
+     */
+    public function getProductInfo(): EKasaProductInfoDto
+    {
+        $apiRequest = ApiRequestBuilder::createGet("/v1/product/info")->build();
+
+        return $this->httpClient->receive($apiRequest, EKasaProductInfoDto::class);
+    }
+
+    //Storage
+
+    /**
+     * TODO
+     */
+    public function getStorageInfo(): StorageInfoDto
+    {
+        $apiRequest = ApiRequestBuilder::createGet("/v1/storage/info")->build();
+
+        return $this->httpClient->receive($apiRequest, StorageInfoDto::class);
+    }
+
+    // Registrations
+
+    /**
+     * Zadá požiadavku na zaregistrovanie dokladu.
+     * @throws ValidationProblemDetailsException ak nie je požiadavka valídna
+     * @throws ProblemDetailsException
+     * @throws ExposeException
+     * @throws ApiAuthenticationException
+     * @throws Exception
+     */
+    public function registerReceipt(
+        RegisterReceiptRequestContextDto $context
+    ): RegisterReceiptResultDto {
+        $apiRequest = ApiRequestBuilder::createPost("/v1/requests/receipts")
+            ->withPayload($context)
+            ->build();
+        return $this->httpClient->receive($apiRequest, RegisterReceiptResultDto::class);
+    }
 }

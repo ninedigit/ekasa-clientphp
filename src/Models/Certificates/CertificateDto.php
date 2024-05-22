@@ -2,6 +2,9 @@
 
 namespace NineDigit\eKasa\Client\Models\Certificates;
 
+/**
+ * Dáta certifikátu
+ */
 final class CertificateDto
 {
     /**
@@ -26,5 +29,4 @@ final class CertificateDto
      * Heslo alebo null, ak nie je nastavené
      */
     public ?string $password;
-    
 }

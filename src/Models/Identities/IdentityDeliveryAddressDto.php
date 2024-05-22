@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Identities;
 /**
  * Doručovacia adresa
  */
-final class IdentityDeliveryAddressDto{
+final class IdentityDeliveryAddressDto
+{
     /**
      * Poštové smerové číslo - kód, ktorý ustanovili
      * poštové autority za účelom doručovania pošty.

@@ -5,14 +5,14 @@ namespace NineDigit\eKasa\Client\Models\Identities;
 /**
  * Druh pokladnice
  */
-final class CashRegisterType{
+final class CashRegisterType
+{
      /**
       * Štandardná pokladnica so stálym predajným miestom
       */
-    const STANDARD = "Standard";
+    public const STANDARD = "Standard";
     /**
      * Prenosná pokladnica, používaná na rôznych predajných miestach v odlišnom čase
      */
-    const PORTABLE = "Portable";
-
+    public const PORTABLE = "Portable";
 }

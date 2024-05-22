@@ -2,7 +2,8 @@
 
 namespace NineDigit\eKasa\Client\Models\Registrations;
 
-final class EKasaErrorDto {
+final class EKasaErrorDto
+{
     /**
      * Chybová správa zo systému e-Kasa.
      * @var string

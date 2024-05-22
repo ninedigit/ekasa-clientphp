@@ -5,9 +5,10 @@ namespace NineDigit\eKasa\Client\Models\Certificates;
 /**
  * Typ úložiska bezpečnostných certifikátov
  */
-final class KeyStoreType {
+final class KeyStoreType
+{
     /**
      * Key store PKCS12
      */
-    const PKCS12 = "PKCS12";
+    public const PKCS12 = "PKCS12";
 }

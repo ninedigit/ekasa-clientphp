@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Storage;
 /**
  * Informácie o pripojenom zariadení
  */
-final class StorageDeviceDto{
+final class StorageDeviceDto
+{
     /**
      * Názov výrobcu získaného zo zbernice
      */

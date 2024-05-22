@@ -37,8 +37,10 @@ class ReceiptBuilder
         return $this;
     }
 
-    public static function cashRegister(string $cashRegisterCode, array $items): CashRegisterReceiptWithItemsAndRoundingAmountBuilder
-    {
+    public static function cashRegister(
+        string $cashRegisterCode,
+        array $items
+    ): CashRegisterReceiptWithItemsAndRoundingAmountBuilder {
         $builder = new CashRegisterReceiptWithItemsAndRoundingAmountBuilder();
 
         $builder
@@ -53,8 +55,10 @@ class ReceiptBuilder
         return $builder;
     }
 
-    public static function invalid(string $cashRegisterCode, array $items): CashRegisterReceiptWithItemsAndRoundingAmountBuilder
-    {
+    public static function invalid(
+        string $cashRegisterCode,
+        array $items
+    ): CashRegisterReceiptWithItemsAndRoundingAmountBuilder {
         $builder = new CashRegisterReceiptWithItemsAndRoundingAmountBuilder();
 
         $builder
@@ -69,8 +73,12 @@ class ReceiptBuilder
         return $builder;
     }
 
-    public static function paragon(string $cashRegisterCode, DateTime $issueDate, int $paragonNumber, array $items): CashRegisterReceiptWithItemsAndRoundingAmountBuilder
-    {
+    public static function paragon(
+        string $cashRegisterCode,
+        DateTime $issueDate,
+        int $paragonNumber,
+        array $items
+    ): CashRegisterReceiptWithItemsAndRoundingAmountBuilder {
         $builder = new CashRegisterReceiptWithItemsAndRoundingAmountBuilder();
 
         $builder
@@ -88,8 +96,11 @@ class ReceiptBuilder
         return $builder;
     }
 
-    public static function invoice(string $cashRegisterCode, int $invoiceNumber, float $amount): CashRegisterReceiptWithRoundingAmountBuilder
-    {
+    public static function invoice(
+        string $cashRegisterCode,
+        int $invoiceNumber,
+        float $amount
+    ): CashRegisterReceiptWithRoundingAmountBuilder {
         $builder = new CashRegisterReceiptWithRoundingAmountBuilder();
 
         $builder
@@ -106,8 +117,13 @@ class ReceiptBuilder
         return $builder;
     }
 
-    public static function invoiceParagon(string $cashRegisterCode, DateTime $issueDate, string $invoiceNumber, int $paragonNumber, float $amount): CashRegisterReceiptWithRoundingAmountBuilder
-    {
+    public static function invoiceParagon(
+        string $cashRegisterCode,
+        DateTime $issueDate,
+        string $invoiceNumber,
+        int $paragonNumber,
+        float $amount
+    ): CashRegisterReceiptWithRoundingAmountBuilder {
         $builder = new CashRegisterReceiptWithRoundingAmountBuilder();
 
         $builder
@@ -126,8 +142,10 @@ class ReceiptBuilder
         return $builder;
     }
 
-    public static function deposit(string $cashRegisterCode, float $amount): ReceiptBuilder
-    {
+    public static function deposit(
+        string $cashRegisterCode,
+        float $amount
+    ): ReceiptBuilder {
         $builder = new ReceiptBuilder();
 
         $builder
@@ -142,8 +160,10 @@ class ReceiptBuilder
         return $builder;
     }
 
-    public static function withdraw(string $cashRegisterCode, float $amount): ReceiptBuilder
-    {
+    public static function withdraw(
+        string $cashRegisterCode,
+        float $amount
+    ): ReceiptBuilder {
         $builder = new ReceiptBuilder();
 
         $builder

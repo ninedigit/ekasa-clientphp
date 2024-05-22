@@ -2,7 +2,8 @@
 
 namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 
-final class RegisterReceiptRequestContextDto {
+final class RegisterReceiptRequestContextDto
+{
     /**
      * Tlačové nastavenia.
      */

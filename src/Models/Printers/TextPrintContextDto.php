@@ -2,7 +2,11 @@
 
 namespace NineDigit\eKasa\Client\Models\Printers;
 
-final class TextPrintContextDto{
+/**
+ * TODO
+ */
+final class TextPrintContextDto
+{
     /**
      * Text na vytlačenie.
      */
@@ -10,7 +14,8 @@ final class TextPrintContextDto{
 
     /**
      * Voliteľný kód pokladnice.
-     * Ak je uvedený, pred textom budú vytlačené identifikačné údaje pre daný kód pokladnice.
+     * Ak je uvedený, pred textom budú vytlačené identifikačné údaje
+     * pre daný kód pokladnice.
      */
     public string $cashRegisterCode;
 }

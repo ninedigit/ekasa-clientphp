@@ -4,7 +4,8 @@ namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 
 use DateTime;
 
-abstract class RegisterResultRequestDto {
+abstract class RegisterResultRequestDto
+{
     /**
      * Unikátný identifikátor požiadavky
      * @example e52ff4d1-f2ed-4493-9e9a-a73739b1ba23

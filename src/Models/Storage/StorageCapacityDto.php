@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Storage;
 /**
  * Informácie o kapacite úložiska
  */
-final class StorageCapacityDto{
+final class StorageCapacityDto
+{
     /**
      * Celková kapacita v bajtoch
      * Nenulová hodnota

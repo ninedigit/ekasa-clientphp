@@ -2,6 +2,9 @@
 
 namespace NineDigit\eKasa\Client\Models\Certificates;
 
+/**
+ * Informácie o certifikáte
+ */
 final class CertificateInfoDto
 {
     /**

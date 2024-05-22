@@ -7,11 +7,11 @@ use NineDigit\eKasa\Client\ApiClientOptions;
 use NineDigit\eKasa\Client\ApiResponseMessage;
 use NineDigit\eKasa\Client\HttpClient;
 
-
-final class TestableHttpClient extends HttpClient {
-    public function __construct(ApiClientOptions $options) {
+final class TestableHttpClient extends HttpClient
+{
+    public function __construct(ApiClientOptions $options)
+    {
         parent::__construct($options);
-        
     }
 
     public function callThrowOnError(ApiResponseMessage $response)
@@ -23,4 +23,4 @@ final class TestableHttpClient extends HttpClient {
     {
         return $this->deserializeResponseMessage($response, $classType);
     }
-};
+}
