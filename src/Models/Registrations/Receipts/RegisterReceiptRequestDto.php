@@ -2,7 +2,8 @@
 
 namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 
-final class RegisterReceiptRequestDto {
+final class RegisterReceiptRequestDto
+{
     /**
      * Externý unikátny identifikátor požiadavky.
      * Neprázdny reťazec s maximálnou dĺžkou 40 znakov.

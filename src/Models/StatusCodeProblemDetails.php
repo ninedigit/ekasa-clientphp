@@ -2,18 +2,22 @@
 
 namespace NineDigit\eKasa\Client\Models;
 
-final class StatusCodeProblemDetails extends ProblemDetails {
-    public function __construct(int $statusCode) {
+final class StatusCodeProblemDetails extends ProblemDetails
+{
+    public function __construct(int $statusCode)
+    {
         $this->type = $this->getDefaultType($statusCode);
         $this->status = $statusCode;
         $this->title = $this->getTitle($statusCode);
     }
 
-    private function getDefaultType(int $statusCode): string {
+    private function getDefaultType(int $statusCode): string
+    {
         return "https://httpstatuses.com/$statusCode";
     }
 
-    private function getTitle($statusCode): string {
+    private function getTitle($statusCode): string
+    {
         return ReasonPhrases::getReasonPhrase($statusCode);
     }
 }

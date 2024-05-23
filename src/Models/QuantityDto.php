@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models;
 /**
  * Množstvo predaného tovaru alebo poskytnutej služby s príslušnou množstevnou jednotkou
  */
-final class QuantityDto {
+final class QuantityDto
+{
     /**
      * Množstvo predaného tovaru alebo poskytnutej služby s presnosťou na 4 desatinné miesta
      */
@@ -15,7 +16,8 @@ final class QuantityDto {
      */
     public string $unit;
 
-    public function __construct(float $amount = 0, string $unit = "x") {
+    public function __construct(float $amount = 0, string $unit = "x")
+    {
         $this->amount = $amount;
         $this->unit = $unit;
     }

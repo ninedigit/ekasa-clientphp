@@ -2,7 +2,8 @@
 
 namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 
-final class RegisterReceiptRequestContextDto {
+final class RegisterReceiptRequestContextDto
+{
     /**
      * Tlačové nastavenia.
      */
@@ -20,6 +21,7 @@ final class RegisterReceiptRequestContextDto {
         $this->print = $print;
         $this->request = $request;
     }
+<<<<<<< HEAD
 
     public static function create(
         ReceiptDto $receipt,
@@ -30,3 +32,6 @@ final class RegisterReceiptRequestContextDto {
         return new RegisterReceiptRequestContextDto($printer, $registerReceiptRequest);
     }
 }
+=======
+}
+>>>>>>> 582bd624e4688804b6b7b5c4d22054986873239a

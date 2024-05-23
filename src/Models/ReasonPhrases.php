@@ -2,7 +2,8 @@
 
 namespace NineDigit\eKasa\Client\Models;
 
-final class ReasonPhrases {
+final class ReasonPhrases
+{
     private static array $phrases = array(
         100 => "Continue",
         101 => "Switching Protocols",
@@ -72,7 +73,8 @@ final class ReasonPhrases {
         511 => "Network Authentication Required"
     );
 
-    public static function getReasonPhrase(int $statusCode): string {
+    public static function getReasonPhrase(int $statusCode): string
+    {
         return ReasonPhrases::$phrases[$statusCode];
     }
 }

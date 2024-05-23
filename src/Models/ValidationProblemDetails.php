@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models;
 /**
  * A Microsoft.AspNetCore.Mvc.ProblemDetails for validation errors.
  */
-final class ValidationProblemDetails extends ProblemDetails {
+final class ValidationProblemDetails extends ProblemDetails
+{
     /**
      * Gets the validation errors associated with this instance
      * of ValidationProblemDetails.
@@ -14,7 +15,8 @@ final class ValidationProblemDetails extends ProblemDetails {
      */
     public array $errors;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->title = "Validation failed.";
     }
 }

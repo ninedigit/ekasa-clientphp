@@ -12,7 +12,8 @@ use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
  *    "email"="NineDigit\eKasa\Client\Models\Registrations\Receipts\EmailRegisterReceiptPrintContextDto"
  * })
  */
-abstract class RegisterReceiptPrintContextDto {
+abstract class RegisterReceiptPrintContextDto
+{
     /**
      * Názov tlačiarne, na ktorej bude doklad spracovaný.
      * Dostupné možnosti: pos, pdf, email.
@@ -24,8 +25,8 @@ abstract class RegisterReceiptPrintContextDto {
      * Nastavenia tlačiarne.
      */
     // public ?ReceiptPrinterOptions $options;
-    
-    public function __construct(?string $printerName/*, ?ReceiptPrinterOptions $options = null*/) {
+    public function __construct(?string $printerName/*, ?ReceiptPrinterOptions $options = null*/)
+    {
         $this->printerName = $printerName;
         //$this->options = $options;
     }

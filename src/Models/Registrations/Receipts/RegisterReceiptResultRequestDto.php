@@ -2,7 +2,8 @@
 
 namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 
-final class RegisterReceiptResultRequestDto extends RegisterResultRequestDto {
+final class RegisterReceiptResultRequestDto extends RegisterResultRequestDto
+{
     /**
      * @var ReceiptRegistrationDataDto
      */

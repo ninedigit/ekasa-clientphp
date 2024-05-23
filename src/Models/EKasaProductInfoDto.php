@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models;
 /**
  * Množstvo predaného tovaru alebo poskytnutej služby s príslušnou množstevnou jednotkou
  */
-final class EKasaProductInfoDto {
+final class EKasaProductInfoDto
+{
     /**
      * Názov výrobcu
      * @example Nine Digit, s.r.o.

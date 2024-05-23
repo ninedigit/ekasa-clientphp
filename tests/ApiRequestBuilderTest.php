@@ -6,8 +6,10 @@ use PHPUnit\Framework\TestCase;
 use NineDigit\eKasa\Client\ApiRequestBuilder;
 use stdClass;
 
-final class ApiRequestBuilderTest extends TestCase {
-    public function testBuildOfCreateGetCreatesCorrectRequest() {
+final class ApiRequestBuilderTest extends TestCase
+{
+    public function testBuildOfCreateGetCreatesCorrectRequest()
+    {
         $path = "/resource";
         $queryString = array(
             "access_token" => "token-123"
@@ -24,7 +26,8 @@ final class ApiRequestBuilderTest extends TestCase {
         $this->assertEquals($headers, $request->headers);
     }
 
-    public function testBuildOfCreatePostCreatesCorrectRequest() {
+    public function testBuildOfCreatePostCreatesCorrectRequest()
+    {
         $path = "/resource";
         $queryString = array(
             "access_token" => "token-123"
@@ -41,7 +44,8 @@ final class ApiRequestBuilderTest extends TestCase {
         $this->assertEquals($headers, $request->headers);
     }
 
-    public function testBuildOfCreatePutCreatesCorrectRequest() {
+    public function testBuildOfCreatePutCreatesCorrectRequest()
+    {
         $path = "/resource";
         $queryString = array(
             "access_token" => "token-123"
@@ -58,7 +62,8 @@ final class ApiRequestBuilderTest extends TestCase {
         $this->assertEquals($headers, $request->headers);
     }
 
-    public function testBuildOfCreateDeleteCreatesCorrectRequest() {
+    public function testBuildOfCreateDeleteCreatesCorrectRequest()
+    {
         $path = "/resource";
         $queryString = array(
             "access_token" => "token-123"
@@ -75,7 +80,8 @@ final class ApiRequestBuilderTest extends TestCase {
         $this->assertEquals($headers, $request->headers);
     }
 
-    public function testBuildOfCreatePostWithDefaultHeadersAndPayloadCreatesCorrectRequest() {
+    public function testBuildOfCreatePostWithDefaultHeadersAndPayloadCreatesCorrectRequest()
+    {
         $path = "/resource";
         $queryString = array(
             "id" => "1",

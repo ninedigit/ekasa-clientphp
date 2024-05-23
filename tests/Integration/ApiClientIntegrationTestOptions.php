@@ -12,7 +12,7 @@ final class ApiClientIntegrationTestOptions
     /**
      * @throws JsonException
      */
-    static function load(string $fileName): ApiClientIntegrationTestOptions
+    public static function load(string $fileName): ApiClientIntegrationTestOptions
     {
         $contents = file_get_contents($fileName);
         $data = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);

@@ -9,7 +9,7 @@ final class EKasaServer
     private function __construct()
     {
     }
-    
+
     /**
      * Získa adresu eKasa API servera zastihnuteľnú cez Expose server.
      * Táto funkcionalita vyžaduje aktiváciu danej služby. Pre viac

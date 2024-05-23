@@ -4,7 +4,7 @@ namespace NineDigit\eKasa\Client\Serialization;
 
 interface SerializerInterface
 {
-    function serialize($data): string;
+    public function serialize($data): string;
 
-    function deserialize($data, $type);
+    public function deserialize($data, $type);
 }
