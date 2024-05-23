@@ -17,15 +17,15 @@ final class EKasaProductInfoDto
      * Jedinečný identifikátor pokladničného programu.
      * @example F5838FA8195427FEC53541F044A52B6CC7BCC67A
      */
-    public string $SWID;
+    public string $swid;
 
     /**
      * Informácie o pokladničnom programe eKasa klient
      */
-    public ProductIdDto $PPEK;
+    public ProductIdDto $ppekk;
 
     /**
      * Informácie o chránenom dátovom úložisku
      */
-    public ProductIdDto $CHDU;
+    public ProductIdDto $chdu;
 }

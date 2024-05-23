@@ -41,8 +41,8 @@ require '../vendor/autoload.php';
 
     // 1.2 Nastavenie autentifikácie
 
-    // 1.2.1 Ak je zapnuté zabezpečenie (viďte WebAdmin (http://localhost:3010) ->
-    // Nastavenia -> Ostatné -> Zabezpečenie)
+    // 1.2.1 Ak je zapnuté zabezpečenie (viďte WebAdmin
+    // (http://localhost:3010) -> Nastavenia -> Ostatné -> Zabezpečenie)
     $credentials = new Credentials("admin", "admin");
 
     // 1.2.2 Ak sa pripájate cez internet a máte zakúpenú službu Expose.
