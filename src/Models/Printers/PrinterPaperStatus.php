@@ -10,17 +10,17 @@ final class PrinterStatusDto
     /**
      * Papier je vložený.
      */
-    public const READY = "READY";
+    public const READY = "Ready";
 
     /**
      * Dvierka na tlačiarni sú otvorené.
      */
-    public const COVEROPEN = "CoverOpen";
+    public const COVER_OPEN = "CoverOpen";
 
     /**
      * Nízky stav papiera v tlačiarni.
      */
-    public const NEAREND = "NearEnd";
+    public const NEAR_END = "NearEnd";
 
     /**
      * Chýbajúci papier v tlačiarni.

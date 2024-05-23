@@ -3,14 +3,10 @@
 
 <rule ref="PSR12"/>
 
-<!-- <exclude name="PEAR.Commenting.FileComment.MissingLinkTag"/>
-
-<rule ref="PEAR">
-  <exclude name="PEAR.Commenting.FileComment.Missing"/>
-</rule>
-
-<rule ref="Generic">
-  <exclude name="Generic.Commenting.DocComment"/>
-</rule> -->
+<!--
+  See:
+   - https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-Ruleset
+   - https://gist.github.com/andreyAndrienko/19941c4b621f3212976ae7e47607e864
+-->
 
 </ruleset>

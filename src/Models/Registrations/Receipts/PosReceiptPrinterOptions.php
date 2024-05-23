@@ -8,17 +8,17 @@ namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 final class PosReceiptPrinterOptions extends ReceiptPrinterOptions
 {
   /**
-   * Nepovinný príznak otvorenia peňažnej zásuvky. Ak je uvedený (nie <c>null</c>),
+   * Nepovinný príznak otvorenia peňažnej zásuvky. Ak je uvedený (nie null),
    * aplikácia uprednostní túto hodnotu pred hodnotou v nastaveniach aplikácie.
    */
     public ?bool $openDrawer;
   /**
-   * Nepovinný príznak tlače grafického loga. Ak je uvedený (nie <c>null</c>),
+   * Nepovinný príznak tlače grafického loga. Ak je uvedený (nie null),
    * aplikácia uprednostní túto hodnotu pred hodnotou v nastaveniach aplikácie.
    */
     public ?bool $printLogo;
   /**
-   * Nepovinná adresa tlače grafického loga. Ak je uvedená (nie <c>null</c>),
+   * Nepovinná adresa tlače grafického loga. Ak je uvedená (nie null),
    * aplikácia uprednostní túto hodnotu pred hodnotou v nastaveniach aplikácie.
    * Hodnota predstavuje číslo v rozsahu 0-255.
    */
