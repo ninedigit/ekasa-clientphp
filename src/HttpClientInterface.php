@@ -3,17 +3,17 @@
 namespace NineDigit\eKasa\Client;
 
 /**
- * TODO
+ * Abstrakcia HTTP klienta
  */
 interface HttpClientInterface
 {
     /**
-     * TODO
+     * Odoslanie požiadavky
      */
     public function send(ApiRequest $request): void;
 
     /**
-     * TODO
+     * Odoslanie požiadavky a získanie odpovede
      */
     public function receive(ApiRequest $request, $type);
 }

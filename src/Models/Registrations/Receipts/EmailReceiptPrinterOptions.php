@@ -19,13 +19,13 @@ final class EmailReceiptPrinterOptions extends ReceiptPrinterOptions
     public ?string $recipientDisplayName;
 
     /**
-     * Nepovinný predmet e-mailu. Ak je uvedené (nie <c>null</c>),
+     * Nepovinný predmet e-mailu. Ak je uvedené (nie null),
      * aplikácia uprednostní túto hodnotu pred hodnotou v nastaveniach aplikácie.
      */
     public ?string $subject;
 
     /**
-     * Nepovinné telo e-mailu. Ak je uvedené (nie <c>null</c>), aplikácia
+     * Nepovinné telo e-mailu. Ak je uvedené (nie null), aplikácia
      * uprednostní túto hodnotu pred hodnotou v nastaveniach aplikácie.
      */
     public ?string $body;

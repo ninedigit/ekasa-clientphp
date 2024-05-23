@@ -3,7 +3,7 @@
 namespace NineDigit\eKasa\Client\Models\Printers;
 
 /**
- * TODO
+ * Kontextuálny objekt pre tlač nefiskálneho dokladu
  */
 final class TextPrintContextDto
 {
