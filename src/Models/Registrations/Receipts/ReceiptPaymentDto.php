@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 /**
  * Platidlo
  */
-final class ReceiptPaymentDto {
+final class ReceiptPaymentDto
+{
     /**
      * Názov platidla v dĺžke 1 až 255 znakov
      * @example Hotovosť
@@ -20,7 +21,10 @@ final class ReceiptPaymentDto {
      */
     public float $amount;
 
-    public function __construct(float $amount, string $name = ReceiptPaymentName::CASH) {
+    public function __construct(
+        float $amount,
+        string $name = ReceiptPaymentName::CASH
+    ) {
         $this->amount = $amount;
         $this->name = $name;
     }

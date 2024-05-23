@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 /**
  * Názov tlačiarne.
  */
-final class ReceiptPrinterName {
+final class ReceiptPrinterName
+{
     /**
      * Označuje názov tlačiarne papierových dokladov.
      */
@@ -19,6 +20,7 @@ final class ReceiptPrinterName {
      */
     public const EMAIL = "email";
 
-    private function __construct() {
+    private function __construct()
+    {
     }
 }

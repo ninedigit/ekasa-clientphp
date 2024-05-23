@@ -4,7 +4,8 @@ namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 
 use NineDigit\eKasa\Client\Models\Registrations\EKasaErrorDto;
 
-abstract class RegisterResultDto {
+abstract class RegisterResultDto
+{
 //    /**
 //     * Dáta požiadavky evidencie.
 //     * @var RegisterResultRequestDto

@@ -12,8 +12,11 @@ final class ApiResponseMessage
     private array $headers;
     private ?string $body;
 
-    public function __construct(int $statusCode = 204, array $headers = array(), ?string $body = null)
-    {
+    public function __construct(
+        int $statusCode = 204,
+        array $headers = array(),
+        ?string $body = null
+    ) {
         $this->statusCode = $statusCode;
         $this->headers = array();
         $this->body = $body;
@@ -38,28 +41,34 @@ final class ApiResponseMessage
         }
     }
 
-    public function getStatusCode(): int {
+    public function getStatusCode(): int
+    {
         return $this->statusCode;
     }
 
-    public function hasStatusCode(int $value): bool {
+    public function hasStatusCode(int $value): bool
+    {
         return $this->statusCode === $value;
     }
 
-    public function getHeader(string $name): ?string {
+    public function getHeader(string $name): ?string
+    {
         return $this->headers[strtolower($name)] ?? null;
     }
 
-    public function getBooleanHeader(string $name, bool $default = false): bool {
+    public function getBooleanHeader(string $name, bool $default = false): bool
+    {
         $header = $this->getHeader($name);
         return $header !== null ? boolval($header) : $default;
     }
 
-    public function getHeaders(): array {
+    public function getHeaders(): array
+    {
         return $this->headers;
     }
 
-    public function setHeaders(array $headers): void {
+    public function setHeaders(array $headers): void
+    {
         $this->headers = array();
 
         foreach ($headers as $name => $value) {
@@ -67,15 +76,18 @@ final class ApiResponseMessage
         }
     }
 
-    public function getBody(): ?string {
+    public function getBody(): ?string
+    {
         return $this->body;
     }
 
-    public function getContentType(): ?string {
+    public function getContentType(): ?string
+    {
         return Header::parse($this->getHeader(HeaderName::CONTENT_TYPE))[0][0] ?? null;
     }
 
-    public function hasContentType(...$contentTypes): bool {
+    public function hasContentType(...$contentTypes): bool
+    {
         $contentType = $this->getContentType();
         return in_array($contentType, $contentTypes);
     }

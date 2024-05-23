@@ -5,7 +5,6 @@ namespace NineDigit\eKasa\Client\Tests;
 use NineDigit\eKasa\Client\ApiRequest;
 use NineDigit\eKasa\Client\HttpClientInterface;
 
-
 final class HttpClientMock implements HttpClientInterface
 {
     private $sendCallback;
@@ -13,8 +12,8 @@ final class HttpClientMock implements HttpClientInterface
 
     public function __construct(
         ?callable $sendCallback = null,
-        ?callable $receiveCallback = null)
-    {
+        ?callable $receiveCallback = null
+    ) {
         $this->sendCallback = $sendCallback;
         $this->receiveCallback = $receiveCallback;
     }

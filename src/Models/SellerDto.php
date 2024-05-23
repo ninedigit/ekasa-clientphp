@@ -5,7 +5,8 @@ namespace NineDigit\eKasa\Client\Models;
 /**
  * Identifikácia predávajúceho
  */
-final class SellerDto {
+final class SellerDto
+{
     /**
      * Identifikátor predávajúceho, v ktorého mene bol predaný tovar alebo poskytnutá služba.
      */

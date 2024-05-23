@@ -8,7 +8,8 @@ use NineDigit\eKasa\Client\ApiErrorCode;
  * A machine-readable format for specifying errors in HTTP API responses based on
  * https://tools.ietf.org/html/rfc7807.
  */
-class ProblemDetails {
+class ProblemDetails
+{
     /**
      * A URI reference [RFC3986] that identifies the problem type. This specification
      * encourages that, when dereferenced, it provides human-readable documentation for

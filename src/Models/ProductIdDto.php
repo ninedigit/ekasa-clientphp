@@ -2,7 +2,8 @@
 
 namespace NineDigit\eKasa\Client\Models;
 
-final class ProductIdDto {
+final class ProductIdDto
+{
     /**
      * Názov produktu
      * @example Portos eKasa

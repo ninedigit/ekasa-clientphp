@@ -40,12 +40,11 @@ final class ApiClientOptions
     public ?SerializerInterface $serializer = null;
 
     public function __construct(
-        ?string                         $url = EKasaServer::LOCALHOST,
+        ?string $url = EKasaServer::LOCALHOST,
         ?ApiClientAuthenticationOptions $authentication = null,
-        ?string                         $proxyUrl = null,
-        ?bool                           $debug = false
-    )
-    {
+        ?string $proxyUrl = null,
+        ?bool $debug = false
+    ) {
         $this->url = $url;
         $this->authentication = $authentication;
         $this->proxyUrl = $proxyUrl;
@@ -60,7 +59,7 @@ final class ApiClientOptions
         if (is_string($filenameOrData)) {
             $contents = file_get_contents($filenameOrData);
             $data = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
-        } else if (is_array($filenameOrData)) {
+        } elseif (is_array($filenameOrData)) {
             $data = $filenameOrData;
         } else {
             throw new InvalidArgumentException("Expecting string or array as an argument.");
@@ -106,7 +105,10 @@ final class ApiClientOptions
                     }
                 }
 
-                $accessToken = new ApiClientAuthenticationAccessTokenOptions($accessTokenData["value"], $accessTokenSource);
+                $accessToken = new ApiClientAuthenticationAccessTokenOptions(
+                    $accessTokenData["value"],
+                    $accessTokenSource
+                );
             }
 
             $authentication->credentials = $credentials;

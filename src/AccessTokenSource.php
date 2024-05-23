@@ -25,8 +25,9 @@ final class AccessTokenSource
      * s tou, nastavenou v EKasa API (viďte WebAdmin -> Nastavenia -> Rozšírenia -> Expose -> Prístupový kľúč).
      * @return AccessTokenSource
      */
-    public static function header(string $headerName = AccessTokenSource::DEFAULT_HEADER_KEY_NAME): AccessTokenSource
-    {
+    public static function header(
+        string $headerName = AccessTokenSource::DEFAULT_HEADER_KEY_NAME
+    ): AccessTokenSource {
         return new AccessTokenSource(AccessTokenSourceName::HEADER, $headerName);
     }
 
@@ -35,8 +36,9 @@ final class AccessTokenSource
      * totožná s tou, nastavenou v EKasa API (viďte WebAdmin -> Nastavenia -> Rozšírenia -> Expose -> Prístupový kľúč).
      * @return AccessTokenSource
      */
-    public static function queryString(string $queryStringKey = AccessTokenSource::DEFAULT_QUERY_STRING_KEY_NAME): AccessTokenSource
-    {
+    public static function queryString(
+        string $queryStringKey = AccessTokenSource::DEFAULT_QUERY_STRING_KEY_NAME
+    ): AccessTokenSource {
         return new AccessTokenSource(AccessTokenSourceName::QUERY_STRING, $queryStringKey);
     }
 }

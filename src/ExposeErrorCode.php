@@ -7,7 +7,7 @@ namespace NineDigit\eKasa\Client;
  */
 final class ExposeErrorCode
 {
-    const TUNNEL_NOT_FOUND = 1;
+    public const TUNNEL_NOT_FOUND = 1;
 
     private function __construct()
     {
