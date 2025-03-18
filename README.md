@@ -113,13 +113,15 @@ $posPrinterOptions->openDrawer = true;
 $print = new PosRegisterReceiptPrintContextDto($posPrinterOptions);
 
 // Položka
-$receiptItem = new ReceiptItemDto(
+$items = array(
+  new ReceiptItemDto(
     ReceiptItemType::POSITIVE,  // Kladný typ položky
     "Coca Cola 0.25l",          // Názov
     1.29,                       // Jednotková cena
     20.00,                      // Daňová hladina
     new QuantityDto(2, "ks"),   // Množstvo
     2.58                        // Cena
+  )
 );
 
 // Požiadavka registrácie

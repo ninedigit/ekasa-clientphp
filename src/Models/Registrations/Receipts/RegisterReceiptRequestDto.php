@@ -17,7 +17,7 @@ final class RegisterReceiptRequestDto {
 
     public function __construct(
         ReceiptDto $data,
-        string $externalId = null
+        ?string $externalId = null
     ) {
         $this->data = $data;
         $this->externalId = $externalId;

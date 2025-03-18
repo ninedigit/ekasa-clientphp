@@ -1,7 +1,7 @@
 {
     "name": "ninedigit/ekasa-clientphp",
     "type": "library",
-    "version": "3.0.1",
+    "version": "3.1.0",
     "description": "API client for eKasa API",
     "homepage": "https://bitbucket.org/9digit/ekasa-clientphp",
     "keywords": ["ekasa", "api", "rest", "http", "client"],

@@ -87,3 +87,6 @@ a dodržiava [sémantické verzionovanie](https://semver.org/spec/v2.0.0.html).
 
 ## [3.0.1] - 2024-11-12
  - Pridané vlastnosť `nonTaxableAmount` do triedy `ReceiptRegistrationDataDto`
+
+## [3.1.0] - 2025-03-18
+ - Vlastnosť `print` triedy `RegisterReceiptRequestContextDto` môže nadobudnúť hodnotu `null`

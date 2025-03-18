@@ -5,8 +5,11 @@ namespace NineDigit\eKasa\Client\Models\Registrations\Receipts;
 final class RegisterReceiptRequestContextDto {
     /**
      * Tlačové nastavenia.
+     * Uvedením hodnoty null bude použitá predvolená tlačiareň
+     * 
+     * @var RegisterReceiptPrintContextDto|null
      */
-    public RegisterReceiptPrintContextDto $print;
+    public ?RegisterReceiptPrintContextDto $print;
 
     /**
      * Požiadavka evidencie dokladu.
@@ -14,7 +17,7 @@ final class RegisterReceiptRequestContextDto {
     public RegisterReceiptRequestDto $request;
 
     public function __construct(
-        RegisterReceiptPrintContextDto $print,
+        ?RegisterReceiptPrintContextDto $print,
         ?RegisterReceiptRequestDto $request
     ) {
         $this->print = $print;
@@ -23,7 +26,7 @@ final class RegisterReceiptRequestContextDto {
 
     public static function create(
         ReceiptDto $receipt,
-        RegisterReceiptPrintContextDto $printer,
+        ?RegisterReceiptPrintContextDto $printer = null,
         ?string $externalId = null
     ): RegisterReceiptRequestContextDto {
         $registerReceiptRequest = new RegisterReceiptRequestDto($receipt, $externalId);
