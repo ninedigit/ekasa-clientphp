@@ -11,7 +11,7 @@ class ResponseException extends Exception {
      */
     public ?int $statusCode;
 
-    public function __construct(?int $statusCode = null, $message = "", $code = 0, Throwable $previous = null) {
+    public function __construct(?int $statusCode = null, $message = "", $code = 0, ?Throwable $previous = null) {
         $this->statusCode = $statusCode;
         parent::__construct($message, $code, $previous);
     }
