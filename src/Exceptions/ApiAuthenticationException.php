@@ -10,7 +10,7 @@ class ApiAuthenticationException extends ResponseException {
      */
     public ?string $schemeName;
 
-    public function __construct(?int $statusCode = null, ?string $schemeName = null, $message = "", $code = 0, Throwable $previous = null) {
+    public function __construct(?int $statusCode = null, ?string $schemeName = null, $message = "", $code = 0, ?Throwable $previous = null) {
         $this->schemeName = $schemeName;
         parent::__construct($statusCode, $message, $code, $previous);
     }

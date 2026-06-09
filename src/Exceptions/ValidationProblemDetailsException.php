@@ -8,7 +8,7 @@ use Throwable;
 final class ValidationProblemDetailsException extends ProblemDetailsException {
     private ValidationProblemDetails $validationProblemDetails;
 
-    public function __construct(ValidationProblemDetails $details, $code = 0, Throwable $previous = null) {
+    public function __construct(ValidationProblemDetails $details, $code = 0, ?Throwable $previous = null) {
         $this->validationProblemDetails = $details;
         parent::__construct($details, $code, $previous);
     }

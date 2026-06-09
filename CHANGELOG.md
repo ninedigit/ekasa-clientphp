@@ -90,3 +90,6 @@ a dodržiava [sémantické verzionovanie](https://semver.org/spec/v2.0.0.html).
 
 ## [3.1.0] - 2025-03-18
  - Vlastnosť `print` triedy `RegisterReceiptRequestContextDto` môže nadobudnúť hodnotu `null`
+
+## [3.1.1] - 2026-06-09
+ - Podpora PHP 8.4
