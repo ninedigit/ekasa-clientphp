@@ -8,7 +8,7 @@ use Throwable;
 class ProblemDetailsException extends ApiException {
     public ProblemDetails $details;
 
-    public function __construct(ProblemDetails $details, $code = 0, Throwable $previous = null) {
+    public function __construct(ProblemDetails $details, $code = 0, ?Throwable $previous = null) {
         $this->details = $details;
         $statusCode = $details->status;
         $message = "$details->type : $details->title";

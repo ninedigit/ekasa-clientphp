@@ -13,7 +13,7 @@ final class ApiRequestMessage
         string $method,
         string $url,
         array $headers = array(),
-        string $body = null
+        ?string $body = null
     ) {
         $this->method = $method;
         $this->url = $url;
