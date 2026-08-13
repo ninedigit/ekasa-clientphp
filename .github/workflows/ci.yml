@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  tests:
+    name: PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Each PHP version resolves a different Symfony branch:
+        #   7.4 -> Symfony 5.4 (annotations), 8.1 -> 6.4, 8.2/8.3/8.4 -> 7.x (attributes)
+        php: ['7.4', '8.1', '8.2', '8.3', '8.4']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: json
+          coverage: none
+
+      # composer.json pins config.platform.php to the 7.4 floor so local installs
+      # resolve the lowest supported dependency set. Drop it in CI so Composer
+      # resolves against the runner's actual PHP and exercises every Symfony branch.
+      - name: Remove platform override
+        run: composer config --unset platform.php
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          dependency-versions: highest
+
+      - name: Check PHP 7.4 compatibility
+        run: vendor/bin/phpcs src --standard=PHPCompatibility --runtime-set testVersion 7.4-
+
+      - name: Run unit tests
+        run: vendor/bin/phpunit --testsuite unit

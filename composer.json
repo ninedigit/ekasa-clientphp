@@ -1,7 +1,7 @@
 {
     "name": "ninedigit/ekasa-clientphp",
     "type": "library",
-    "version": "3.2.0",
+    "version": "3.3.0",
     "description": "API client for eKasa API",
     "homepage": "https://bitbucket.org/9digit/ekasa-clientphp",
     "keywords": ["ekasa", "api", "rest", "http", "client"],
@@ -23,12 +23,12 @@
         }
     },
     "require": {
-        "doctrine/common": "*",
+        "doctrine/common": "^3.4",
         "doctrine/annotations": "^1.13 || ^2.0",
         "php": "^7.4 || ^8.1",
         "guzzlehttp/guzzle": "^7.0",
-        "symfony/serializer": "^5.4 || ^6.4",
-        "symfony/property-access": "^5.4 || ^6.4",
+        "symfony/serializer": "^5.4 || ^6.4 || ^7.0",
+        "symfony/property-access": "^5.4 || ^6.4 || ^7.0",
         "squizlabs/php_codesniffer": "3.*",
         "phpdocumentor/reflection-docblock": "^5.3",
         "ext-json": "*"
@@ -41,7 +41,7 @@
     "config": {
         "vendor-dir": "vendor",
         "platform": {
-            "php": "8.1.0"
+            "php": "7.4.29"
         }
     },
     "scripts": {

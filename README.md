@@ -216,3 +216,15 @@ Napríklad:
 ```
 ./vendor/bin/phpcs --standard=PHPCompatibility --extensions=php --runtime-set testVersion 8.1- ./src
 ```
+
+## Lokálne testovanie CI
+
+Prerekvizity:
+ - spustený Docker Desktop
+ - aktuálny pracovný adresár je nastavený na `ekasa-clientphp` koreňový adresár
+
+```
+brew install act
+open -a Docker      # start Docker Desktop first
+act pull_request
+```
