@@ -66,3 +66,7 @@ composer.lock
 .idea
 
 /tests/integration/settings.json
+
+# PHPUnit
+/.phpunit.result.cache
+/.phpunit.cache

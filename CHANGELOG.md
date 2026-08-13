@@ -93,3 +93,10 @@ a dodržiava [sémantické verzionovanie](https://semver.org/spec/v2.0.0.html).
 
 ## [3.1.1] - 2026-06-09
  - Podpora PHP 8.4
+
+## [3.3.0] - 2026-08-13
+ - Pridaná podpora `symfony/serializer` a `symfony/property-access` vo verzii `^7.0` (pre PHP >= 8.2). Knižnica naďalej podporuje PHP 7.4 (Symfony 5.4) aj PHP 8.1+ (Symfony 6.4).
+ - Serializer teraz načítava mapovacie metadáta z PHP 8 atribútov (`AttributeLoader`) na Symfony >= 6.4 a z docblock anotácií (`AnnotationLoader`) na Symfony 5.4.
+ - Obmedzený rozsah verzií závislosti `doctrine/common` z `*` na `^3.4`.
+ - Vývojové prostredie (`config.platform.php`) a validácia sú nastavené na najnižšiu podporovanú verziu PHP 7.4.
+ - Pridaná GitHub Actions matica pre PHP 7.4, 8.1, 8.2, 8.3 a 8.4.
