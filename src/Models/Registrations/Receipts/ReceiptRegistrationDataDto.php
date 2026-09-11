@@ -119,6 +119,14 @@ final class ReceiptRegistrationDataDto extends RegistrationDataDto
      */
     public ?array $items;
     /**
+     * Sumár obratov DPH.
+     *
+     * Predvolená hodnota null zabezpečuje, že klient nezlyhá pri komunikácii
+     * so staršou verziou API, ktorá túto vlastnosť neposiela.
+     * @var VatRatesTaxSummaryDto|null
+     */
+    public ?VatRatesTaxSummaryDto $vatRatesTaxSummary = null;
+    /**
      * @var string|null
      * Overovací kód podnikateľa.
      */

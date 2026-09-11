@@ -22,6 +22,8 @@ use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptRequestD
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptResultDto;
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptResultRequestDto;
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptResultResponseDto;
+use NineDigit\eKasa\Client\Models\Registrations\Receipts\VatRateTaxSummaryDto;
+use NineDigit\eKasa\Client\Models\Registrations\Receipts\VatRatesTaxSummaryDto;
 use NineDigit\eKasa\Client\Models\TaxFreeReason;
 use PHPUnit\Framework\TestCase;
 use NineDigit\eKasa\Client\Models\Registrations\Receipts\ReceiptType;
@@ -355,6 +357,278 @@ final class SymfonyJsonSerializerTest extends TestCase
         $this->assertInstanceOf(EKasaErrorDto::class, $result->error);
         $this->assertEquals("Chyba v podpise dátovej správy.", $result->error->message);
         $this->assertEquals(-10, $result->error->code);
+    }
+
+    public function testRegisterReceiptResultDtoDeserializationWithNullExternalId()
+    {
+        $serializer = new SymfonyJsonSerializer();
+        $type = RegisterReceiptResultDto::class;
+
+        $json = '{
+    "request": {
+        "data": {
+            "receiptType": "CashRegister",
+            "amount": 1.00,
+            "roundingAmount": 0.00,
+            "issueDate": "2023-09-11T18:14:11+02:00",
+            "receiptNumber": 6,
+            "items": [{
+                "type": "Positive",
+                "name": "Coca Cola 0.25l",
+                "price": 1.00,
+                "unitPrice": 1.00,
+                "quantity": {
+                    "amount": 1.0000,
+                    "unit": "ks"
+                },
+                "vatRate": 20.00
+            }],
+            "payments": [{
+                "name": "Hotovosť",
+                "amount": 1.00
+            }],
+            "createDate": "2023-09-11T18:14:11+02:00",
+            "cashRegisterCode": "88812345678900001"
+        },
+        "id": "f00d1cea-6d8d-46ac-9877-09ca29f90ef5",
+        "externalId": null,
+        "date": "2023-09-11T18:14:11+02:00",
+        "sendingCount": 1
+    },
+    "response": {
+        "data": {
+            "id": "O-0A3730BF772041C9B730BF77205-TEST"
+        },
+        "processDate": "2023-09-11T18:14:12+02:00"
+    },
+    "isSuccessful": true,
+    "error": null,
+    "$type": "Receipt"
+}';
+
+        $result = $serializer->deserialize($json, $type);
+
+        $this->assertInstanceOf(RegisterReceiptResultDto::class, $result);
+        $this->assertInstanceOf(RegisterReceiptResultRequestDto::class, $result->request);
+        $this->assertNull($result->request->externalId);
+        $this->assertEquals("f00d1cea-6d8d-46ac-9877-09ca29f90ef5", $result->request->id);
+        $this->assertEquals(1, $result->request->sendingCount);
+        $this->assertTrue($result->isSuccessful);
+        $this->assertNull($result->error);
+    }
+
+    /**
+     * Na neúspešne zaevidovanej požiadavke API vracia "response": null
+     * (RegisterResultDTO.Response je Required.AllowNull).
+     */
+    public function testRegisterReceiptResultDtoDeserializationWithNullResponse()
+    {
+        $serializer = new SymfonyJsonSerializer();
+        $type = RegisterReceiptResultDto::class;
+
+        $json = '{
+    "request": {
+        "data": {
+            "receiptType": "CashRegister",
+            "amount": 1.00,
+            "roundingAmount": 0.00,
+            "issueDate": "2023-09-11T18:14:11+02:00",
+            "receiptNumber": 6,
+            "items": [],
+            "payments": [],
+            "createDate": "2023-09-11T18:14:11+02:00",
+            "cashRegisterCode": "88812345678900001"
+        },
+        "id": "f00d1cea-6d8d-46ac-9877-09ca29f90ef5",
+        "externalId": "EID-0094736",
+        "date": "2023-09-11T18:14:11+02:00",
+        "sendingCount": 1
+    },
+    "response": null,
+    "isSuccessful": false,
+    "error": {
+        "message": "Chyba v podpise dátovej správy.",
+        "code": -10
+    },
+    "$type": "Receipt"
+}';
+
+        $result = $serializer->deserialize($json, $type);
+
+        $this->assertInstanceOf(RegisterReceiptResultDto::class, $result);
+        $this->assertFalse($result->isSuccessful);
+        // Pred opravou sa null deserializoval na prázdnu inštanciu, takže táto
+        // kontrola prešla a až prístup k $result->response->data zlyhal.
+        $this->assertNull($result->response);
+        $this->assertInstanceOf(EKasaErrorDto::class, $result->error);
+        $this->assertEquals("Chyba v podpise dátovej správy.", $result->error->message);
+        $this->assertEquals(-10, $result->error->code);
+        // Request je Required.Always, ostáva nenullovateľný.
+        $this->assertInstanceOf(RegisterReceiptResultRequestDto::class, $result->request);
+    }
+
+    public function testValidationProblemDetailsDeserializationWithoutErrors()
+    {
+        $serializer = new SymfonyJsonSerializer();
+
+        $json = '{
+      "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+      "title": "One or more validation errors occurred.",
+      "status": 400,
+      "traceId": "00-3883c3382a81f24ca6ac58a375d6de64-d99c7a32e359d24f-00"
+    }';
+
+        $details = $serializer->deserialize($json, ValidationProblemDetails::class);
+
+        $this->assertInstanceOf(ValidationProblemDetails::class, $details);
+        // Bez predvolenej hodnoty by čítanie vlastnosti skončilo chybou
+        // "must not be accessed before initialization".
+        $this->assertIsArray($details->errors);
+        $this->assertCount(0, $details->errors);
+        $this->assertEquals(400, $details->status);
+    }
+
+    public function testValidationProblemDetailsHasEmptyErrorsByDefault()
+    {
+        $details = new ValidationProblemDetails();
+
+        $this->assertIsArray($details->errors);
+        $this->assertCount(0, $details->errors);
+        $this->assertEquals("Validation failed.", $details->title);
+    }
+
+    public function testProblemDetailsDeserializationWithNullTitle()
+    {
+        $serializer = new SymfonyJsonSerializer();
+
+        $json = '{
+      "title": null,
+      "status": 403,
+      "instance": "/api/v1/requests/receipts",
+      "code": -100
+    }';
+
+        $details = $serializer->deserialize($json, ProblemDetails::class);
+
+        $this->assertInstanceOf(ProblemDetails::class, $details);
+        $this->assertNull($details->title);
+        $this->assertEquals(403, $details->status);
+        $this->assertEquals(ApiErrorCode::GENERAL_ERROR, $details->code);
+    }
+
+    public function testRegisterReceiptResultDtoDeserializationWithVatRatesTaxSummary()
+    {
+        $serializer = new SymfonyJsonSerializer();
+        $type = RegisterReceiptResultDto::class;
+
+        $json = '{
+    "request": {
+        "data": {
+            "receiptType": "CashRegister",
+            "amount": 12.30,
+            "roundingAmount": 0.00,
+            "issueDate": "2023-09-11T18:14:11+02:00",
+            "receiptNumber": 6,
+            "items": [],
+            "payments": [],
+            "vatRatesTaxSummary": {
+                "totalVatBase": 10.00,
+                "totalVatAmout": 2.30,
+                "totalTaxableAmount": 12.30,
+                "totalNonTaxableAmount": 0.50,
+                "totalAmount": 12.80,
+                "items": [{
+                    "vatRate": 23.00,
+                    "vatBase": 10.00,
+                    "vatAmount": 2.30,
+                    "totalAmount": 12.30
+                }, {
+                    "vatRate": null,
+                    "vatBase": 0.00,
+                    "vatAmount": 0.00,
+                    "totalAmount": 0.50
+                }]
+            },
+            "createDate": "2023-09-11T18:14:11+02:00",
+            "cashRegisterCode": "88812345678900001"
+        },
+        "id": "f00d1cea-6d8d-46ac-9877-09ca29f90ef5",
+        "externalId": "EID-0094736",
+        "date": "2023-09-11T18:14:11+02:00",
+        "sendingCount": 1
+    },
+    "response": {
+        "data": {
+            "id": "O-0A3730BF772041C9B730BF77205-TEST"
+        },
+        "processDate": "2023-09-11T18:14:12+02:00"
+    },
+    "isSuccessful": true,
+    "error": null,
+    "$type": "Receipt"
+}';
+
+        $result = $serializer->deserialize($json, $type);
+
+        $summary = $result->request->data->vatRatesTaxSummary;
+
+        $this->assertInstanceOf(VatRatesTaxSummaryDto::class, $summary);
+        $this->assertEquals(10.00, $summary->totalVatBase);
+        $this->assertEquals(2.30, $summary->totalVatAmout);
+        $this->assertEquals(12.30, $summary->totalTaxableAmount);
+        $this->assertEquals(0.50, $summary->totalNonTaxableAmount);
+        $this->assertEquals(12.80, $summary->totalAmount);
+
+        $this->assertIsArray($summary->items);
+        $this->assertCount(2, $summary->items);
+
+        // Položky podliehajúce DPH
+        $this->assertInstanceOf(VatRateTaxSummaryDto::class, $summary->items[0]);
+        $this->assertEquals(23.00, $summary->items[0]->vatRate);
+        $this->assertEquals(10.00, $summary->items[0]->vatBase);
+        $this->assertEquals(2.30, $summary->items[0]->vatAmount);
+        $this->assertEquals(12.30, $summary->items[0]->totalAmount);
+
+        // Položky nepodliehajúce DPH majú sadzbu null
+        $this->assertInstanceOf(VatRateTaxSummaryDto::class, $summary->items[1]);
+        $this->assertNull($summary->items[1]->vatRate);
+        $this->assertEquals(0.50, $summary->items[1]->totalAmount);
+    }
+
+    public function testRegisterReceiptResultDtoDeserializationWithoutVatRatesTaxSummary()
+    {
+        $serializer = new SymfonyJsonSerializer();
+        $type = RegisterReceiptResultDto::class;
+
+        // Staršia verzia API vlastnosť vatRatesTaxSummary neposiela.
+        $json = '{
+    "request": {
+        "data": {
+            "receiptType": "CashRegister",
+            "amount": 1.00,
+            "roundingAmount": 0.00,
+            "issueDate": "2023-09-11T18:14:11+02:00",
+            "receiptNumber": 6,
+            "items": [],
+            "payments": [],
+            "createDate": "2023-09-11T18:14:11+02:00",
+            "cashRegisterCode": "88812345678900001"
+        },
+        "id": "f00d1cea-6d8d-46ac-9877-09ca29f90ef5",
+        "externalId": "EID-0094736",
+        "date": "2023-09-11T18:14:11+02:00",
+        "sendingCount": 1
+    },
+    "response": null,
+    "isSuccessful": null,
+    "error": null,
+    "$type": "Receipt"
+}';
+
+        $result = $serializer->deserialize($json, $type);
+
+        $this->assertNull($result->request->data->vatRatesTaxSummary);
+        $this->assertNull($result->isSuccessful);
     }
 
     public function testValidationProblemDetailsDeserialization()

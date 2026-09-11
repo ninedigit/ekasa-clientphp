@@ -9,8 +9,9 @@ final class RegisterReceiptResultDto extends RegisterResultDto {
      */
     public RegisterReceiptResultRequestDto $request;
     /**
-     *
-     * @var RegisterReceiptResultResponseDto
+     * Obsahuje informácie o úspešnom spracovaní požiadavky.
+     * Obsahuje hodnotu, iba ak $isSuccessful je true.
+     * @var RegisterReceiptResultResponseDto|null
      */
-    public RegisterReceiptResultResponseDto $response;
+    public ?RegisterReceiptResultResponseDto $response;
 }

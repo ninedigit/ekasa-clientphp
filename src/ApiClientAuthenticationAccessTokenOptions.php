@@ -6,7 +6,7 @@ final class ApiClientAuthenticationAccessTokenOptions
 {
     /**
      * Prístupový kľúč
-     * @var string|null
+     * @var string
      */
     public string $value;
     /**

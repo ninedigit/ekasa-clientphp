@@ -13,9 +13,9 @@ abstract class RegisterResultRequestDto {
     public string $id;
     /**
      * Externý unikátny identifikátor požiadavky.
-     * @var string
+     * @var string|null
      */
-    public string $externalId;
+    public ?string $externalId;
     /**
      * Dátum a čas odoslania požiadavky e-kasa klientom.
      * Pri opakovaných pokusoch o odoslanie môže byť neskorší,

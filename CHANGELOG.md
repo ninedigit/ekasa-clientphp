@@ -91,8 +91,8 @@ a dodržiava [sémantické verzionovanie](https://semver.org/spec/v2.0.0.html).
 ## [3.1.0] - 2025-03-18
  - Vlastnosť `print` triedy `RegisterReceiptRequestContextDto` môže nadobudnúť hodnotu `null`
 
-## [3.1.1] - 2026-06-09
- - Podpora PHP 8.4
+## [3.2.0] - 2026-06-09
+ - Podpora PHP 8.4. Odstránené upozornenia `Implicitly marking parameter $... as nullable is deprecated` doplnením otáznika k typom voliteľných parametrov `?Throwable $previous` v triedach `ApiException`, `ApiAuthenticationException`, `ExposeException`, `ProblemDetailsException`, `ResponseException` a `ValidationProblemDetailsException` a `?string $body` v triede `ApiRequestMessage`.
 
 ## [3.3.0] - 2026-08-13
  - Pridaná podpora `symfony/serializer` a `symfony/property-access` vo verzii `^7.0` (pre PHP >= 8.2). Knižnica naďalej podporuje PHP 7.4 (Symfony 5.4) aj PHP 8.1+ (Symfony 6.4).
@@ -100,3 +100,15 @@ a dodržiava [sémantické verzionovanie](https://semver.org/spec/v2.0.0.html).
  - Obmedzený rozsah verzií závislosti `doctrine/common` z `*` na `^3.4`.
  - Vývojové prostredie (`config.platform.php`) a validácia sú nastavené na najnižšiu podporovanú verziu PHP 7.4.
  - Pridaná GitHub Actions matica pre PHP 7.4, 8.1, 8.2, 8.3 a 8.4.
+
+## [3.4.0] - 2026-09-11
+ - Vlastnosť `externalId` triedy `RegisterResultRequestDto` môže nadobudnúť hodnotu `null`. Týmto je opravená chyba deserializácie odpovede servera (`The type of the "externalId" attribute for class "NineDigit\eKasa\Client\Models\Registrations\Receipts\RegisterReceiptResultRequestDto" must be one of "string" ("null" given).`).
+ - Vlastnosť `response` triedy `RegisterReceiptResultDto` môže nadobudnúť hodnotu `null`. Hodnotu obsahuje iba vtedy, ak je vlastnosť `isSuccessful` rovná `true`. Pôvodne sa hodnota `null` deserializovala na prázdnu inštanciu triedy `RegisterReceiptResultResponseDto`, takže kontrola `$result->response !== null` nesprávne prešla a chyba sa prejavila až pri prístupe k vlastnosti `$result->response->data`.
+ - Pridané nové triedy `VatRatesTaxSummaryDto` a `VatRateTaxSummaryDto` a nová vlastnosť `vatRatesTaxSummary` triedy `ReceiptRegistrationDataDto`. Sumár obratov DPH bol doposiaľ v odpovedi servera ticho zahadzovaný. Vlastnosť `totalVatAmout` triedy `VatRatesTaxSummaryDto` zámerne kopíruje preklep v názve vlastnosti na strane *eKasa API*, aby sa hodnota správne deserializovala.
+ - Vlastnosť `title` triedy `ProblemDetails` môže nadobudnúť hodnotu `null`.
+ - Vlastnosť `errors` triedy `ValidationProblemDetails` má predvolenú hodnotu prázdneho poľa. Ak server túto vlastnosť neposlal, prístup k nej skončil chybou `Typed property NineDigit\eKasa\Client\Models\ValidationProblemDetails::$errors must not be accessed before initialization`.
+ - Opravená anotácia `@var` vlastnosti `value` triedy `ApiClientAuthenticationAccessTokenOptions`, ktorá si protirečila s natívnym typom vlastnosti.
+
+### Zmeny netýkajúce sa konzumenta knižnice
+ - Pridané testy deserializácie pre hodnotu `null` vo vlastnostiach `externalId`, `response` a `title`, pre chýbajúcu vlastnosť `errors` a pre vlastnosť `vatRatesTaxSummary`.
+ - Pridaný test `DtoNullabilityConsistencyTest`, ktorý overuje, že anotácie `@var` sú zhodné s natívnymi typmi vlastností vo všetkých triedach knižnice. Trieda `SymfonyJsonSerializer` skladá extraktor typov v poradí `[PhpDocExtractor, ReflectionExtractor]`, takže anotácia `@var` má prednosť pred natívnym typom vlastnosti a ich nesúlad spôsobí chybu deserializácie.

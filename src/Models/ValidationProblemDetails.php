@@ -12,7 +12,7 @@ final class ValidationProblemDetails extends ProblemDetails {
      * @var array
      * @example array("field1" => array("error1", "error2"))
      */
-    public array $errors;
+    public array $errors = array();
 
     public function __construct() {
         $this->title = "Validation failed.";
